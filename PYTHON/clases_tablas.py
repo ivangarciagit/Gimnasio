@@ -14,6 +14,7 @@ class Usuarios:
 
     def listar(self):
         return self.conexion.consultar("SELECT * FROM Usuarios")
+        delay(3)
 
     def actualizar_campo(self, usuario_id, campo, nuevo_valor):
 

@@ -1,7 +1,7 @@
 
 from conexion import ConexionDB
 from clases_tablas import Usuarios
-from funciones import dataframe, existe_id, val_nombre, val_correo, val_auto, delay
+from funciones import dataframe, existe_id, val_nombre, val_correo, val_auto
 
 
 conn = ConexionDB()
@@ -54,7 +54,6 @@ Ingrese su opción:   """))
                     tabla = usuario.listar()
                     conn.cerrar()
                     dataframe(tabla)
-                    delay(4)
                     break
                 elif select == 3:
                     usuario = Usuarios(conn)
@@ -71,7 +70,6 @@ Ingrese su opción:   """))
                             else:
                                 print(
                                     "ID errónea, no existe en la base de datos. Intenta de nuevo.")
-
                         else:
                             print("Ingresa una ID valida")
                     while True:
@@ -103,6 +101,7 @@ Ingrese su opción:   """))
                             print('Opcion no valida')
                     usuario.actualizar_campo(usuario_id, campo, nuevo_valor)
                     conn.cerrar()
+                    break
                 elif select == 4:
                     break
                 else:
