@@ -1,0 +1,76 @@
+Ususarios:
+INSERT INTO Usuarios (nombre, correo, vehiculo) VALUES
+('Ana Perez', 'ana.perez@email.com', TRUE),
+('Luis Gomez', 'luis.gomez@email.com', TRUE),
+('Maria Lopez', 'maria.lopez@email.com', TRUE),
+('Carlos Diaz', 'carlos.diaz@email.com', TRUE),
+('Sofia Martinez', 'sofia.martinez@email.com', TRUE),
+('Juan Ramirez', 'juan.ramirez@email.com', FALSE);
+Sucursal:
+INSERT INTO Sucursal (nombre, direccion) VALUES
+('Sucursal Guadalajara Centro', 'C. Dionisio Rodríguez 139, Centro, Guadalajara, Jal.'),
+('Sucursal Zapopan La Calma', 'Av. Mariano Otero 3507, La Calma, Zapopan, Jal.'),
+('Sucursal Zapopan Patria', 'Av. Patria #528-B, Jardines de Guadalupe, Zapopan, Jal.');
+Estacionamiento:
+INSERT INTO Estacionamiento (sucursal_id, lugar_numero, disponible) VALUES
+
+(1, 101, TRUE), (1, 102, TRUE), (1, 103, TRUE), (1, 104, TRUE), (1, 105, TRUE),
+(1, 106, TRUE), (1, 107, TRUE), (1, 108, TRUE), (1, 109, TRUE), (1, 110, TRUE),
+(1, 111, TRUE), (1, 112, TRUE), (1, 113, TRUE), (1, 114, TRUE), (1, 115, TRUE),
+
+(2, 101, TRUE), (2, 102, TRUE), (2, 103, TRUE), (2, 104, TRUE), (2, 105, TRUE),
+(2, 106, TRUE), (2, 107, TRUE), (2, 108, TRUE), (2, 109, TRUE), (2, 110, TRUE),
+(2, 111, TRUE), (2, 112, TRUE), (2, 113, TRUE), (2, 114, TRUE), (2, 115, TRUE),
+
+(3, 101, TRUE), (3, 102, TRUE), (3, 103, TRUE), (3, 104, TRUE), (3, 105, TRUE),
+(3, 106, TRUE), (3, 107, TRUE), (3, 108, TRUE), (3, 109, TRUE), (3, 110, TRUE),
+(3, 111, TRUE), (3, 112, TRUE), (3, 113, TRUE), (3, 114, TRUE), (3, 115, TRUE);
+ 
+Permiso_Estacionamiento:
+INSERT INTO Permiso_Estacionamiento (usuario_id, estacionamiento_id, fecha_asignacion) VALUES
+(1, 1, '2025-08-01'),
+(2, 2, '2025-08-03'),
+(3, 16, '2025-08-01'),
+(4, 17, '2025-08-02'),
+(5, 31, '2025-08-04');
+
+Tienda:
+INSERT INTO Tienda (nombre, sucursal_id) VALUES
+('Mercado Central Guadalajara', 1),
+('Tienda La Minerva', 1),
+('Centro Comercial Andares', 2),
+('Boutique Zapopan Plaza', 2),
+('Supermercado Coyoacán', 3),
+('Farmacia Zapopan Norte', 3);
+
+Provedor:
+INSERT INTO Provedor (nombre, contacto) VALUES
+('Gimports de México', 'ventas@gimports.com.mx'),
+('Body Solid México', 'ventas@bodysolidmexico.com'),
+('Power Steel', 'ventas@powersteel.mx'),
+('Iron Equipment', 'info@ironequipmentmx.com'),
+('Life Fitness México', 'contacto@lifefitness.com.mx');
+
+Producto:
+INSERT INTO Producto (nombre, descripcion, precio, provedor_id) VALUES
+('Proteína Whey Gold', 'Proteína de suero de leche para aumento de masa muscular.', 1200.00, 1),
+('BCAA Aminoácidos', 'Aminoácidos ramificados para recuperación muscular.', 850.00, 2),
+('Creatina Pura', 'Creatina para aumento de fuerza y potencia.', 500.00, 3),
+('Glutamina Premium', 'Suplemento para recuperación y reparación muscular.', 750.00, 4),
+('Omega 3', 'Ácidos grasos esenciales para salud cardiovascular.', 650.00, 5);
+
+Venta:
+INSERT INTO Venta (tienda_id, usuario_id, fecha, total) VALUES
+(2, 3, '2025-07-01', 1350.00),
+(6, 1, '2025-07-16', 2600.00),
+(4, 4, '2025-07-20', 1700.00);
+
+Detalle_venta:
+INSERT INTO Detalle_venta (venta_id, producto_id, cantidad, subtotal) VALUES
+(1, 2, 1, 850.00),
+(1, 3, 1, 500.00),
+(2, 1, 1, 1200.00),
+(2, 4, 1, 750.00),
+(2, 5, 1, 650.00),
+(3, 1, 1, 1200.00),
+(3, 3, 1, 500.00);

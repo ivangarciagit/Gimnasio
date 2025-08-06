@@ -1,0 +1,63 @@
+CREATE TABLE Usuarios (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(255),
+  correo VARCHAR(255),
+  vehiculo BOOLEAN
+);
+CREATE TABLE Sucursal (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(255),
+  direccion VARCHAR(255)
+);
+CREATE TABLE Estacionamiento (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  sucursal_id INT,
+  lugar_numero INT,
+  disponible BOOLEAN,
+  FOREIGN KEY (sucursal_id) REFERENCES Sucursal(id) 
+);
+CREATE TABLE Permiso_Estacionamiento(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    usuario_id INT,
+    estacionamiento_id INT,
+    fecha_asignacion DATE,
+    FOREIGN KEY (usuario_id) REFERENCES Usuarios(id) ,
+    FOREIGN key (estacionamiento_id) REFERENCES Estacionamiento(id) 
+);
+CREATE TABLE Tienda(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255),
+    sucursal_id INT,
+    FOREIGN KEY (sucursal_id) REFERENCES Sucursal(id) 
+);
+CREATE TABLE Provedor (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255),
+    contacto VARCHAR(255)
+);
+CREATE TABLE Producto(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255),
+    descripcion TEXT,
+    precio DECIMAL(10,2),
+    provedor_id INT,
+    FOREIGN KEY (provedor_id) REFERENCES Provedor(id) 
+);
+CREATE TABLE Venta(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    tienda_id INT,
+    usuario_id INT,
+    fecha DATE,
+    total DECIMAL(10,2),
+    FOREIGN KEY (tienda_id) REFERENCES Tienda(id),
+    FOREIGN KEY (usuario_id) REFERENCES Usuarios(id) 
+);
+CREATE TABLE Detalle_venta(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    venta_id INT,
+    producto_id INT,
+    cantidad INT,
+    subtotal DECIMAL(10,2),
+    FOREIGN KEY (venta_id) REFERENCES Venta(id),
+    FOREIGN KEY (producto_id) REFERENCES Producto(id) 
+);
