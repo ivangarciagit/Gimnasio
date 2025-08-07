@@ -13,15 +13,8 @@ def existe_id(conexion, tabla, usuario_id):  # Valida si el ID existe en la base
 
     cursor = conexion.cursor()
     query = f"SELECT 1 FROM {tabla} WHERE id = %s LIMIT 1"
-
-    try:
-        cursor.execute(query, (usuario_id,))
-        resultado = cursor.fetchone()
-    except Exception as e:
-        cursor.close()
-        print(f"Error en la consulta: {e}")
-        return False
-
+    cursor.execute(query, (usuario_id,))
+    resultado = cursor.fetchone()
     cursor.close()
     return resultado is not None
 
@@ -34,6 +27,15 @@ def dataframe(lista):  # Crea Data Frame
 def val_nombre():  # Valida que no este vacio el nombre
     while True:
         nombre = input("Agrega tu nombre: ").strip()
+        if nombre:
+            return nombre
+        else:
+            print("El nombre no puede estar vacío. Intenta de nuevo.")
+
+
+def val_direccion():  # Valida que no este vacio el nombre
+    while True:
+        nombre = input("Agrega la Direccion:  ").strip()
         if nombre:
             return nombre
         else:

@@ -14,7 +14,6 @@ class Usuarios:
 
     def listar(self):
         return self.conexion.consultar("SELECT * FROM Usuarios")
-        delay(3)
 
     def actualizar_campo(self, usuario_id, campo, nuevo_valor):
 
@@ -34,6 +33,13 @@ class Sucursal:
 
     def listar(self):
         return self.conexion.consultar("SELECT * FROM Sucursal")
+
+    def actualizar_campo(self, sucursal_id, campo, nuevo_valor):
+
+        query = f"UPDATE Sucursal SET {campo} = %s WHERE id = %s"
+        self.conexion.ejecutar(query, (nuevo_valor, sucursal_id))
+        print('Los datos se actualizaron con exito...')
+        delay(3)
 
 
 class Estacionamiento:
