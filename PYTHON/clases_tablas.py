@@ -20,7 +20,7 @@ class Usuarios:
         query = f"UPDATE Usuarios SET {campo} = %s WHERE id = %s"
         self.conexion.ejecutar(query, (nuevo_valor, usuario_id))
         print('Los datos se actualizaron con exito...')
-        delay(3)
+        delay(2)
 
 
 class Sucursal:
@@ -39,7 +39,7 @@ class Sucursal:
         query = f"UPDATE Sucursal SET {campo} = %s WHERE id = %s"
         self.conexion.ejecutar(query, (nuevo_valor, sucursal_id))
         print('Los datos se actualizaron con exito...')
-        delay(3)
+        delay(2)
 
 
 class Estacionamiento:
@@ -62,9 +62,6 @@ class Estacionamiento:
         JOIN Sucursal s ON e.sucursal_id = s.id
         GROUP BY s.id, s.nombre;""")
 
-    def update(self):
-        pass
-
 
 class Tienda:
     def __init__(self, conexion):
@@ -78,10 +75,18 @@ class Tienda:
     def listar(self):
         return self.conexion.consultar(
             """SELECT 
+        Tienda.id AS ID,
         Tienda.nombre AS nombre_tienda,
         Sucursal.nombre AS nombre_sucursal
         FROM Tienda
         JOIN Sucursal ON Tienda.sucursal_id = Sucursal.id;""")
+
+    def actualizar_campo(self, tienda_id, campo, nuevo_valor):
+
+        query = f"UPDATE Tienda SET {campo} = %s WHERE id = %s"
+        self.conexion.ejecutar(query, (nuevo_valor, tienda_id))
+        print('Los datos se actualizaron con exito...')
+        delay(2)
 
 
 class Provedor:
