@@ -1,11 +1,8 @@
-from funciones import dataframe, existe_id, val_nombre, val_correo, val_auto, delay
-from conexion import ConexionDB
+from funciones import dataframe, ingreso_verificar_id, val_nombre, val_correo, val_auto, delay
 from clases_tablas import Usuarios
 
-conn = ConexionDB()
 
-
-def menu_Usuarios():
+def menu_Usuarios(conn):
     while True:
         try:
             select = int(input("""
@@ -34,21 +31,10 @@ Ingrese su opción:   """))
             delay(3)
         elif select == 3:
             usuario = Usuarios(conn)
-            conn.conectar()
-            tabla = 'Usuarios'
-            while True:  # Ingresar el id
-                entrada = input("Ingresa el ID : ")
-                if entrada.isdigit() and int(entrada) >= 1:
-                    usuario_id = int(entrada)
-                    if existe_id(conn.conn, tabla, usuario_id):  # Validar el ID
-                        print(
-                            f"El usuario con ID {usuario_id} existe.")
-                        break
-                    else:
-                        print(
-                            "ID errónea, no existe en la base de datos. Intenta de nuevo.")
-                else:
-                    print("Ingresa una ID valida")
+            table = 'Usuarios'
+            mensaje = 'Ingrese el ID del Usuario'
+            # Ingresa y verifica que la ID exista
+            usuario_id = ingreso_verificar_id(conn, table, mensaje)
             while True:
                 try:
                     sel_campo = int(input("""
@@ -76,6 +62,7 @@ Ingrese su opción:   """))
 
                 else:
                     print('Opcion no valida')
+            conn.conectar()
             usuario.actualizar_campo(usuario_id, campo, nuevo_valor)
             conn.cerrar()
         elif select == 4:

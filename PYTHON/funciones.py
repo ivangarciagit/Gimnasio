@@ -64,3 +64,36 @@ def val_auto():   # Valida si tiene carro
 
 def delay(tiempo):
     time.sleep(tiempo)
+
+
+def mostrar_sucursales(conn):
+    from clases_tablas import Sucursal
+    sucursal = Sucursal(conn)
+    conn.conectar()
+    tabla = sucursal.listar()
+    conn.cerrar()
+    dataframe(tabla)
+    delay(3)
+
+
+def ingreso_verificar_id(conn, tabla, mensaje, mostrar_info_extra=False):
+    conn.conectar()
+    try:
+        while True:
+            entrada = input(mensaje + ": ")
+            if entrada.isdigit() and int(entrada) >= 1:
+                id_verificada = int(entrada)
+                if existe_id(conn.conn, tabla, id_verificada):
+                    print(f"La ID {id_verificada} existe.")
+                    return id_verificada
+                else:
+                    print(
+                        "ID errónea, no existe en la base de datos. Intenta de nuevo.")
+                    if mostrar_info_extra:
+                        mostrar_sucursales(conn)
+                        print('Estas son las sucursales, corrobore el ID de la suya')
+                        delay(2)
+            else:
+                print("Ingresa una ID valida")
+    finally:
+        conn.cerrar()

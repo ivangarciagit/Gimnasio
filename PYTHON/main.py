@@ -2,6 +2,9 @@
 from menu_Usuario import menu_Usuarios
 from menu_Sucursal import menu_Sucursal
 from menu_Tienda import menu_Tienda
+from conexion import ConexionDB
+
+conn = ConexionDB()
 
 
 def main():
@@ -25,13 +28,13 @@ Ingrese su opción:   """))
             print("Por favor, ingresa un número válido.")
             continue
         if opcion == 1:  # Opciones de Usuarios
-            menu_Usuarios()
+            menu_Usuarios(conn)
         elif opcion == 2:  # Opciones de Sucursal
-            menu_Sucursal()
+            menu_Sucursal(conn)
         elif opcion == 3:  # Opciones de Estacionamiento
             pass
         elif opcion == 4:  # Opciones de Tienda
-            menu_Tienda()
+            menu_Tienda(conn)
 
 
 main()

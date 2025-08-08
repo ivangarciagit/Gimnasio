@@ -1,4 +1,4 @@
-from funciones import dataframe, existe_id, val_nombre, val_direccion
+from funciones import dataframe, existe_id, val_nombre
 from conexion import ConexionDB
 from clases_tablas import Estacionamiento
 from funciones import delay

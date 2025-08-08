@@ -1,11 +1,9 @@
-from funciones import dataframe, existe_id, val_nombre, val_direccion
-from conexion import ConexionDB
+from funciones import dataframe, ingreso_verificar_id, val_nombre, val_direccion
 from clases_tablas import Sucursal
 from funciones import delay
-conn = ConexionDB()
 
 
-def menu_Sucursal():
+def menu_Sucursal(conn):
     while True:
         try:
             select = int(input("""
@@ -34,20 +32,10 @@ Ingrese su opción:   """))
         elif select == 3:
             sucursal = Sucursal(conn)
             conn.conectar()
-            tabla = 'Sucursal'
-            while True:  # Ingresar el id
-                entrada = input("Ingresa el ID : ")
-                if entrada.isdigit() and int(entrada) >= 1:
-                    sucursal_id = int(entrada)
-                    if existe_id(conn.conn, tabla, sucursal_id):  # Validar el ID
-                        print(
-                            f"El usuario con ID {sucursal_id} existe.")
-                        break
-                    else:
-                        print(
-                            "ID errónea, no existe en la base de datos. Intenta de nuevo.")
-                else:
-                    print("Ingresa una ID valida")
+            table = 'Sucursal'
+            mensaje = 'Ingrese el ID de la Sucursal'
+            sucursal_id = ingreso_verificar_id(
+                conn, table, mensaje)  # Inrgeso y verifica la ID
             while True:
                 try:
                     sel_campo = int(input("""
@@ -67,6 +55,7 @@ Ingrese su opción:   """))
                     break
                 else:
                     print('Opcion no valida')
+            conn.conectar()
             sucursal.actualizar_campo(sucursal_id, campo, nuevo_valor)
             conn.cerrar()
         elif select == 4:
