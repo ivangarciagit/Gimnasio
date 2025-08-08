@@ -14,8 +14,8 @@ def menu_Tienda(conn):
 Ingrese su opción:   """))
         except ValueError:
             print("Por favor, ingresa un número válido.")
-        if select == 1:
-            nombre = val_nombre()  # Valida el nombre
+        if select == 1:  # Ingresar Datos
+            nombre = val_nombre()
             tienda = Tienda(conn)
 
             table = 'Sucursal'
@@ -26,14 +26,14 @@ Ingrese su opción:   """))
             tienda.agregar(nombre, sucursal_id)
             print('Los Datos fueron insertados con exito..')
             conn.cerrar()
-        elif select == 2:
+        elif select == 2:  # Listar Datos
             tienda = Tienda(conn)
             conn.conectar()
             tabla = tienda.listar()
             conn.cerrar()
             dataframe(tabla)
             delay(3)
-        elif select == 3:
+        elif select == 3:  # actualizar datos
             tienda = Tienda(conn)
             table = 'Tienda'
             mensaje = 'Ingresa el ID de la tienda que deseas actualizar : '

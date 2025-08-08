@@ -14,7 +14,7 @@ def menu_Sucursal(conn):
 Ingrese su opción:   """))
         except ValueError:
             print("Por favor, ingresa un número válido.")
-        if select == 1:
+        if select == 1:  # Insertar Dato
             sucursal = Sucursal(conn)
             nombre_suc = val_nombre()
             direccion = val_direccion()
@@ -22,14 +22,14 @@ Ingrese su opción:   """))
             sucursal.agregar(nombre_suc, direccion)
             print('Los Datos fueron insertados con exito..')
             conn.cerrar()
-        elif select == 2:
+        elif select == 2:  # Listar Datos
             sucursal = Sucursal(conn)
             conn.conectar()
             tabla = sucursal.listar()
             conn.cerrar()
             dataframe(tabla)
             delay(3)
-        elif select == 3:
+        elif select == 3:  # Actualizar Datos
             sucursal = Sucursal(conn)
             conn.conectar()
             table = 'Sucursal'

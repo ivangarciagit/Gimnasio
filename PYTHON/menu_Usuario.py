@@ -13,7 +13,7 @@ def menu_Usuarios(conn):
 Ingrese su opción:   """))
         except ValueError:
             print("Por favor, ingresa un número válido.")
-        if select == 1:
+        if select == 1:  # Ingresar Datos
             usuario = Usuarios(conn)
             nombre = val_nombre()  # Valida el nombre
             correo = val_correo()  # Valida correo
@@ -22,14 +22,14 @@ Ingrese su opción:   """))
             usuario.agregar(nombre, correo, vehiculo)
             print('Los Datos fueron insertados con exito..')
             conn.cerrar()
-        elif select == 2:
+        elif select == 2:  # Listar Datos
             usuario = Usuarios(conn)
             conn.conectar()
             tabla = usuario.listar()
             conn.cerrar()
             dataframe(tabla)
             delay(3)
-        elif select == 3:
+        elif select == 3:  # Actualizar Datos
             usuario = Usuarios(conn)
             table = 'Usuarios'
             mensaje = 'Ingrese el ID del Usuario'
