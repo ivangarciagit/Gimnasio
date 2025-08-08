@@ -114,7 +114,7 @@ class Producto:
         self.conexion = conexion
 
     def agregar(self, nombre, descripcion, precio, provedor_id):
-        query = "INSERT INTO Producto(nombre,contacto) Values (%s,%s,%s,%s)"
+        query = "INSERT INTO Producto(nombre,descripcion,precio,provedor_id) Values (%s,%s,%s,%s)"
         self.conexion.ejecutar(
             query, (nombre, descripcion, precio, provedor_id))
 
@@ -128,6 +128,13 @@ class Producto:
     Provedor.nombre AS provedor
     FROM Producto
     JOIN Provedor ON Producto.provedor_id = Provedor.id;""")
+
+    def actualizar_campo(self, producto_id, campo, nuevo_valor):
+
+        query = f"UPDATE Producto SET {campo} = %s WHERE id = %s"
+        self.conexion.ejecutar(query, (nuevo_valor, producto_id))
+        print('Los datos se actualizaron con exito...')
+        delay(2)
 
 
 class Venta:

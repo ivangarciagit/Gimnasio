@@ -17,7 +17,6 @@ Ingrese su opción:   """))
         if select == 1:  # Ingresar Datos
             nombre = val_nombre()
             tienda = Tienda(conn)
-
             table = 'Sucursal'
             mensaje = 'Ingrese el ID de la sucursal que pertenece'
             sucursal_id = ingreso_verificar_id(

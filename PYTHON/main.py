@@ -3,6 +3,10 @@ from menu_Usuario import menu_Usuarios
 from menu_Sucursal import menu_Sucursal
 from menu_Tienda import menu_Tienda
 from menu_provedor import menu_Provedor
+from menu_producto import menu_Producto
+from menu_Venta import menu_Venta
+from menu_detalle_venta import menu_detalle_venta
+
 from conexion import ConexionDB
 
 conn = ConexionDB()
@@ -38,6 +42,15 @@ Ingrese su opción:   """))
             menu_Tienda(conn)
         elif opcion == 5:  # Opciones de provedor
             menu_Provedor(conn)
+        elif opcion == 6:  # Opciones de producto
+            menu_Producto(conn)
+        elif opcion == 7:  # Opciones de Venta
+            menu_Venta(conn)
+        elif opcion == 8:  # Opciones de detalle_venta
+            menu_detalle_venta(conn)
+        elif opcion == 9:
+            print('Saliendo del menu....')
+            break
 
 
 main()

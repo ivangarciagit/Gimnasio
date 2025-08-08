@@ -35,7 +35,7 @@ def val_nombre():  # Valida que no este vacio el nombre
 
 def val_descripcion():  # Valida que no este vacio
     while True:
-        nombre = input("Agrega tu nombre: ").strip()
+        nombre = input("Agrega la descripcion: ").strip()
         if nombre:
             return nombre
         else:
@@ -75,14 +75,22 @@ def delay(tiempo):
     time.sleep(tiempo)
 
 
-def mostrar_sucursales(conn):
-    from clases_tablas import Sucursal
-    sucursal = Sucursal(conn)
-    conn.conectar()
-    tabla = sucursal.listar()
-    conn.cerrar()
-    dataframe(tabla)
-    delay(3)
+def mostrar_sucursales(conn, table):
+    if table == 'Sucursal':
+        from clases_tablas import Sucursal
+        sucursal = Sucursal(conn)
+        tabla = sucursal.listar()
+        dataframe(tabla)
+        delay(3)
+    elif table == 'Provedor':
+        from clases_tablas import Provedor
+        provedor = Provedor(conn)
+        tabla = provedor.listar()
+        dataframe(tabla)
+        delay(3)
+
+    else:
+        pass
 
 
 def ingreso_verificar_id(conn, tabla, mensaje, mostrar_info_extra=False):
@@ -99,7 +107,7 @@ def ingreso_verificar_id(conn, tabla, mensaje, mostrar_info_extra=False):
                     print(
                         "ID errónea, no existe en la base de datos. Intenta de nuevo.")
                     if mostrar_info_extra:
-                        mostrar_sucursales(conn)
+                        mostrar_sucursales(conn, tabla)
                         print('Estas son las sucursales, corrobore el ID de la suya')
                         delay(2)
             else:

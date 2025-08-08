@@ -31,7 +31,6 @@ Ingrese su opción:   """))
             delay(3)
         elif select == 3:  # Actualizar Datos
             sucursal = Sucursal(conn)
-            conn.conectar()
             table = 'Sucursal'
             mensaje = 'Ingrese el ID de la Sucursal'
             sucursal_id = ingreso_verificar_id(
