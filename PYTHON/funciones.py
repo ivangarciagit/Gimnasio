@@ -5,7 +5,7 @@ import time
 
 def existe_id(conexion, tabla, usuario_id):  # Valida si el ID existe en la base de datos
     tablas_permitidas = ['Usuarios', 'Estacionamiento',
-                         'Sucursal', 'Tienda', 'Producto', 'Venta']
+                         'Sucursal', 'Tienda', 'Producto', 'Venta', 'Provedor', 'Detalle_venta']
 
     if tabla not in tablas_permitidas:
         raise ValueError(

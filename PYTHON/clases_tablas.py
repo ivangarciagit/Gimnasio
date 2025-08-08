@@ -101,6 +101,13 @@ class Provedor:
     def listar(self):
         return self.conexion.consultar('SELECT * FROM Provedor')
 
+    def actualizar_campo(self, provedor_id, campo, nuevo_valor):
+
+        query = f"UPDATE Provedor SET {campo} = %s WHERE id = %s"
+        self.conexion.ejecutar(query, (nuevo_valor, provedor_id))
+        print('Los datos se actualizaron con exito...')
+        delay(2)
+
 
 class Producto:
     def __init__(self, conexion):
