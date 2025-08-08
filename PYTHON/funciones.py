@@ -33,6 +33,15 @@ def val_nombre():  # Valida que no este vacio el nombre
             print("El nombre no puede estar vacío. Intenta de nuevo.")
 
 
+def val_descripcion():  # Valida que no este vacio
+    while True:
+        nombre = input("Agrega tu nombre: ").strip()
+        if nombre:
+            return nombre
+        else:
+            print("El nombre no puede estar vacío. Intenta de nuevo.")
+
+
 def val_direccion():  # Valida que no este vacio el nombre
     while True:
         nombre = input("Agrega la Direccion:  ").strip()
@@ -97,3 +106,16 @@ def ingreso_verificar_id(conn, tabla, mensaje, mostrar_info_extra=False):
                 print("Ingresa una ID valida")
     finally:
         conn.cerrar()
+
+
+def validar_precio():
+    while True:
+        entrada = input("Ingresa el precio: ")
+        try:
+            precio = float(entrada)
+            if precio < 0:
+                print("El precio debe ser un número positivo.")
+                continue
+            return round(precio, 2)
+        except ValueError:
+            print("Por favor, ingresa un número válido.")
