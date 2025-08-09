@@ -157,6 +157,13 @@ class Venta:
     JOIN Tienda ON Venta.tienda_id = Tienda.id
     JOIN Usuarios ON Venta.usuario_id = Usuarios.id;""")
 
+    def actualizar_campo(self, Venta_id, campo, nuevo_valor):
+
+        query = f"UPDATE Venta SET {campo} = %s WHERE id = %s"
+        self.conexion.ejecutar(query, (nuevo_valor, Venta_id))
+        print('Los datos se actualizaron con exito...')
+        delay(2)
+
 
 class Detalle_venta:
     def __init__(self, conexion):

@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 import time
+from datetime import datetime
 
 
 def existe_id(conexion, tabla, usuario_id):  # Valida si el ID existe en la base de datos
@@ -88,6 +89,18 @@ def mostrar_sucursales(conn, table):
         tabla = provedor.listar()
         dataframe(tabla)
         delay(3)
+    elif table == 'Tienda':
+        from clases_tablas import Tienda
+        tienda = Tienda(conn)
+        tabla = tienda.listar()
+        dataframe(tabla)
+        delay(3)
+    elif table == 'Usuarios':
+        from clases_tablas import Usuarios
+        usuarios = Usuarios(conn)
+        tabla = usuarios.listar()
+        dataframe(tabla)
+        delay(3)
 
     else:
         pass
@@ -108,7 +121,7 @@ def ingreso_verificar_id(conn, tabla, mensaje, mostrar_info_extra=False):
                         "ID errónea, no existe en la base de datos. Intenta de nuevo.")
                     if mostrar_info_extra:
                         mostrar_sucursales(conn, tabla)
-                        print('Estas son las sucursales, corrobore el ID de la suya')
+                        print('Estas son las ID, corrobore el ID de la suya')
                         delay(2)
             else:
                 print("Ingresa una ID valida")
@@ -116,9 +129,9 @@ def ingreso_verificar_id(conn, tabla, mensaje, mostrar_info_extra=False):
         conn.cerrar()
 
 
-def validar_precio():
+def validar_precio(mensaje):
     while True:
-        entrada = input("Ingresa el precio: ")
+        entrada = input(mensaje)
         try:
             precio = float(entrada)
             if precio < 0:
@@ -127,3 +140,13 @@ def validar_precio():
             return round(precio, 2)
         except ValueError:
             print("Por favor, ingresa un número válido.")
+
+
+def validar_fecha():
+    while True:
+        fecha_in = input("Ingrese una fecha en formato dd/mm/yyyy: ")
+        try:
+            fecha = datetime.strptime(fecha_in, "%d/%m/%Y")
+            return fecha
+        except ValueError:
+            print("Fecha inválida. Por favor, inténtelo de nuevo.")

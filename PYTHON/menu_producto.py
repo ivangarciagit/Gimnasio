@@ -17,7 +17,8 @@ Ingrese su opción:   """))
             producto = Producto(conn)
             nombre = val_nombre()
             descripcion = val_descripcion()
-            precio = validar_precio()
+            mensaje = 'Ingresa el precio del producto'
+            precio = validar_precio(mensaje)
             tabla = 'Provedor'
             mensaje = 'Ingresa el ID de tu Provedor'
             provedor_id = ingreso_verificar_id(
@@ -61,7 +62,8 @@ Ingrese su opción:   """))
 
                 elif sel_campo == 3:
                     campo = 'precio'
-                    nuevo_valor = validar_precio()
+                    mensaje = 'Ingresa el precio del producto'
+                    nuevo_valor = validar_precio(mensaje)
                     break
                 elif sel_campo == 4:
                     campo = 'provedor_id'
