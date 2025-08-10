@@ -5,7 +5,8 @@ from menu_Tienda import menu_Tienda
 from menu_provedor import menu_Provedor
 from menu_producto import menu_Producto
 from menu_Venta import menu_Venta
-from menu_detalle_venta import menu_detalle_venta
+from menu_detalle_venta import menu_venta_detalle
+
 
 from conexion import ConexionDB
 
@@ -26,7 +27,7 @@ Presione el número de la opción:
 5 - Entrar a Proveedor
 6 - Entrar a Producto
 7 - Entrar a Venta
-8 - Entrar a DetalleVenta
+8 - Entrar a detalle_venta
 9 - Salir
 Ingrese su opción:   """))
         except ValueError:
@@ -46,8 +47,8 @@ Ingrese su opción:   """))
             menu_Producto(conn)
         elif opcion == 7:  # Opciones de Venta
             menu_Venta(conn)
-        elif opcion == 8:  # Opciones de detalle_venta
-            menu_detalle_venta(conn)
+        elif opcion == 8:  # Opciones de Venta
+            menu_venta_detalle(conn)
         elif opcion == 9:
             print('Saliendo del menu....')
             break

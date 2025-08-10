@@ -82,25 +82,31 @@ def mostrar_sucursales(conn, table):
         sucursal = Sucursal(conn)
         tabla = sucursal.listar()
         dataframe(tabla)
-        delay(3)
+        delay(2)
     elif table == 'Provedor':
         from clases_tablas import Provedor
         provedor = Provedor(conn)
         tabla = provedor.listar()
         dataframe(tabla)
-        delay(3)
+        delay(2)
     elif table == 'Tienda':
         from clases_tablas import Tienda
         tienda = Tienda(conn)
         tabla = tienda.listar()
         dataframe(tabla)
-        delay(3)
+        delay(2)
     elif table == 'Usuarios':
         from clases_tablas import Usuarios
         usuarios = Usuarios(conn)
         tabla = usuarios.listar()
         dataframe(tabla)
-        delay(3)
+        delay(2)
+    elif table == 'Producto':
+        from clases_tablas import Producto
+        producto = Producto(conn)
+        tabla = producto.listar()
+        dataframe(tabla)
+        delay(2)
 
     else:
         pass
@@ -150,3 +156,16 @@ def validar_fecha():
             return fecha
         except ValueError:
             print("Fecha inválida. Por favor, inténtelo de nuevo.")
+
+
+def cantidad_producto():
+    while True:
+        entrada = input('Ingrese la cantidad de productos vendidos: ')
+        try:
+            numero = int(entrada)
+            if numero <= 0:
+                print("El número debe ser mayor a 0 y entero")
+                continue
+            return numero
+        except ValueError:
+            print("Por favor, ingresa un número entero válido.")

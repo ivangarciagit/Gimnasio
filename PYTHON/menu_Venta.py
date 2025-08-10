@@ -1,5 +1,6 @@
-from funciones import dataframe, ingreso_verificar_id, delay, validar_fecha, validar_precio
+from funciones import dataframe, ingreso_verificar_id, delay, validar_fecha
 from clases_tablas import Venta
+from menu_detalle_venta import subtotal_detalle
 
 
 def menu_Venta(conn):
@@ -24,10 +25,21 @@ Ingrese su opción:   """))
             usuario_id = ingreso_verificar_id(
                 conn, table, mensaje, mostrar_info_extra=True)
             fecha = validar_fecha()
-            mensaje = 'Cual fue el total de la venta :'
-            total = validar_precio(mensaje)
+            total, detalles = subtotal_detalle(conn)
             conn.conectar()
-            venta.agregar(tienda_id, usuario_id, fecha, total)
+            venta_id = venta.agregar_retorno(
+                tienda_id, usuario_id, fecha, total)
+            try:
+                cursor = conn.cursor
+                query_detalle = "INSERT INTO Detalle_venta (venta_id, producto_id, cantidad, subtotal)VALUES (%s, %s, %s,%s)"
+
+                for item in detalles:
+                    cursor.execute(
+                        query_detalle, (venta_id, item['id_producto'], item['cantidad'], item['subtotal']))
+                conn.conn.commit()
+            except Exception as e:
+                conn.conn.rollback()
+                print("Error al insertar detalles de la venta:", e)
             print('Los Datos fueron insertados con exito..')
             conn.cerrar()
         elif select == 2:  # Listar Datos
@@ -49,7 +61,6 @@ Selecciona el campo que deseas actualizar
 1 - tienda_id
 2 - usuario_id
 3 - fecha
-4 - total
 Ingrese su opción:   """))
                 except ValueError:
                     print("Por favor, ingresa un número válido.")
@@ -73,11 +84,11 @@ Ingrese su opción:   """))
                     campo = 'fecha'
                     nuevo_valor = validar_fecha()
                     break
-                elif sel_campo == 4:
-                    campo = 'total'
-                    mensaje = 'Ingrese el Total de la Venta :'
-                    nuevo_valor = validar_precio(mensaje)
-                    break
+                # elif sel_campo == 4:
+                #     campo = 'total'
+                #     mensaje = 'Ingrese el Total de la Venta :'
+                #     nuevo_valor = validar_precio(mensaje)
+                #     break
 
                 else:
                     print('Opcion no valida')

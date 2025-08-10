@@ -145,6 +145,13 @@ class Venta:
         query = "INSERT INTO Venta(tienda_id,usuario_id,fecha,total) Values (%s,%s,%s,%s)"
         self.conexion.ejecutar(query, (tienda_id, usuario_id, fecha, total))
 
+    def agregar_retorno(self, tienda_id, usuario_id, fecha, total):
+        query = "INSERT INTO Venta(tienda_id,usuario_id,fecha,total) Values (%s,%s,%s,%s)"
+        cursor = self.conexion.ejecutar_con_retorno(
+            query, (tienda_id, usuario_id, fecha, total))
+        venta_id = cursor.lastrowid
+        return venta_id
+
     def listar(self):
         return self.conexion.consultar(
             """SELECT 
@@ -169,9 +176,10 @@ class Detalle_venta:
     def __init__(self, conexion):
         self.conexion = conexion
 
-    def agregar(self, tienda_id, usuario_id, fecha, total):
-        query = "INSERT INTO Detalle_venta(tienda_id,usuario_id,fecha,total) Values (%s,%s,%s,%s)"
-        self.conexion.ejecutar(query, (tienda_id, usuario_id, fecha, total))
+    def agregar(self, venta_id, producto_id, cantidad, subtotal):
+        query = "INSERT INTO Detalle_venta(venta_id,producto_id,cantidad,subtotal) Values (%s,%s,%s,%s)"
+        self.conexion.ejecutar(
+            query, (venta_id, producto_id, cantidad, subtotal))
 
     def listar(self):
         return self.conexion.consultar(
@@ -183,3 +191,13 @@ class Detalle_venta:
     detalle_venta.subtotal
 	FROM detalle_venta
     JOIN producto ON detalle_venta.producto_id = producto.id""")
+
+    def obtener_precio_producto(self, producto_id, conn):
+        conn.conectar()
+        query = "SELECT precio FROM Producto WHERE id = %s"
+        resultado = self.conexion.consultar(query, (producto_id,))
+        conn.cerrar()
+        if resultado is not None:
+            return float(resultado[0]['precio'])
+        else:
+            return None

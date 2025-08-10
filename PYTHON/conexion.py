@@ -27,6 +27,11 @@ class ConexionDB:
         self.cursor.execute(query, params or ())
         self.conn.commit()
 
+    def ejecutar_con_retorno(self, query, params=None):
+        self.cursor.execute(query, params or ())
+        self.conn.commit()
+        return self.cursor
+
     def consultar(self, query, params=None):
         self.cursor.execute(query, params or ())
         return self.cursor.fetchall()
