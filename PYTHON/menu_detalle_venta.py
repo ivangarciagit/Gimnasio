@@ -43,5 +43,5 @@ def subtotal_detalle(conn):
             print("Error: opción inválida. Por favor, presione 1 o 0.")
 
 
-def menu_venta_detalle(conn):
+def menu_venta_detalle():
     pass
