@@ -1,4 +1,4 @@
-from funciones import dataframe, ingreso_verificar_id, delay, validar_fecha
+from funciones import dataframe, ingreso_verificar_id, delay, asignar_fecha, validar_fecha
 from clases_tablas import Venta
 from menu_detalle_venta import subtotal_detalle
 
@@ -24,7 +24,7 @@ Ingrese su opción:   """))
             mensaje = 'Ingrese el ID  del Usuario que hizo la compra'
             usuario_id = ingreso_verificar_id(
                 conn, table, mensaje, mostrar_info_extra=True)
-            fecha = validar_fecha()
+            fecha = asignar_fecha()
             total, detalles = subtotal_detalle(conn)
             conn.conectar()
             venta_id = venta.agregar_retorno(

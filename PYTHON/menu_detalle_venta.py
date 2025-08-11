@@ -1,4 +1,4 @@
-from funciones import ingreso_verificar_id, cantidad_producto
+from funciones import ingreso_verificar_id, cantidad_producto, dataframe
 from clases_tablas import Detalle_venta
 
 
@@ -43,5 +43,9 @@ def subtotal_detalle(conn):
             print("Error: opción inválida. Por favor, presione 1 o 0.")
 
 
-def menu_venta_detalle():
-    pass
+def menu_venta_detalle(conn):
+    detalles = Detalle_venta(conn)
+    conn.conectar()
+    tabla = detalles.listar()
+    dataframe(tabla)
+    conn.cerrar()

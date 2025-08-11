@@ -1,7 +1,7 @@
 import pandas as pd
 import re
 import time
-from datetime import datetime
+from datetime import datetime, date
 
 
 def existe_id(conexion, tabla, usuario_id):  # Valida si el ID existe en la base de datos
@@ -156,6 +156,10 @@ def validar_fecha():
             return fecha
         except ValueError:
             print("Fecha inválida. Por favor, inténtelo de nuevo.")
+
+
+def asignar_fecha():
+    return date.today()
 
 
 def cantidad_producto():

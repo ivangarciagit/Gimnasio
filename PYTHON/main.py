@@ -38,7 +38,7 @@ Ingrese su opción:   """))
         elif opcion == 2:  # Opciones de Sucursal
             menu_Sucursal(conn)
         elif opcion == 3:  # Opciones de Estacionamiento
-            pass
+            print('no entendi bien lo que queria pero lo demas jala')
         elif opcion == 4:  # Opciones de Tienda
             menu_Tienda(conn)
         elif opcion == 5:  # Opciones de provedor

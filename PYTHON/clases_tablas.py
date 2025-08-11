@@ -190,7 +190,8 @@ class Detalle_venta:
     detalle_venta.cantidad,
     detalle_venta.subtotal
 	FROM detalle_venta
-    JOIN producto ON detalle_venta.producto_id = producto.id""")
+    JOIN producto ON detalle_venta.producto_id = producto.id
+    ORDER BY detalle_venta.id""")
 
     def obtener_precio_producto(self, producto_id, conn):
         conn.conectar()
